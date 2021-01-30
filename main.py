@@ -1,18 +1,21 @@
 import cv2
 import pyautogui as pg
 import time
+import numpy as np
 pg.hotkey('alt','tab')
 capture = cv2.VideoCapture(0)
 capture.set(3, 640)
 capture.set(4, 480)
-
+#0 97 59 84 108 255
+skin_lower = np.array([0,59,108])
+skin_upper = np.array([97,84,255])
 while True:
     success, frame = capture.read()
     frame = cv2.flip(frame,1)
     cv2.rectangle(frame,(340,180),(540,380),(0,255,0))
     aoi = frame[180:380,340:540]
     hsv = cv2.cvtColor(aoi,cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv,(0,20,70),(20,255,255))
+    mask = cv2.inRange(hsv,skin_lower,skin_upper)
     mask = cv2.dilate(mask,(5,5),iterations=10)
     mask = cv2.GaussianBlur(mask, (3,3), cv2.BORDER_DEFAULT)
     contour, hierarchy = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
