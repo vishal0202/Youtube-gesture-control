@@ -41,4 +41,3 @@ while True:
     cv2.imshow("webcam", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-	#this is a random comment
