@@ -6,9 +6,9 @@ pg.hotkey('alt','tab')
 capture = cv2.VideoCapture(0)
 capture.set(3, 640)
 capture.set(4, 480)
-#0 97 59 84 108 255
-skin_lower = np.array([0,59,108])
-skin_upper = np.array([97,84,255])
+
+skin_lower = np.array([0,28,132])
+skin_upper = np.array([172,103,255])
 while True:
     success, frame = capture.read()
     frame = cv2.flip(frame,1)
